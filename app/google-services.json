@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "770861485362",
+    "firebase_url": "https://wine-inventory-c50fb.firebaseio.com",
+    "project_id": "wine-inventory-c50fb",
+    "storage_bucket": "wine-inventory-c50fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770861485362:android:0c558eae2ee78d42f09b2b",
+        "android_client_info": {
+          "package_name": "com.supersu.inventory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770861485362-hgr6n7tih8ptabv0e4nafts4rkdsgcac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKlc9J0L-rpzoFAaj7YLx9eMJEsAV65Bc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770861485362-hgr6n7tih8ptabv0e4nafts4rkdsgcac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

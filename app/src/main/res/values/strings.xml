@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Inventory</string>
+    <string name="add_brand_ncategory">Add Brand/\nCategory</string>
+    <string name="report_system_n">Report System\n</string>
+    <string name="daily_stock_nmanagement">Daily Stock\nManagement</string>
+    <string name="add_product_n">Stock  \n Purchase</string>
+    <string name="dashboard">Dashboard</string>
+</resources>
