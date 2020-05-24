@@ -1,9 +1,7 @@
 package com.supersu.inventory.models;
 
-import java.net.IDN;
-
 public class ItemModel {
-    public static final String TABLE_NAME = "dailyAddProduct";
+   /* public static final String TABLE_NAME = "dailyAddProduct";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_VENDORNAME = "vendorName";
     public static final String COLUMN_TP_NUMBER= "tpNumber";
@@ -37,16 +35,45 @@ public class ItemModel {
             " INT NOT NULL , " + COLUMN_EXCISE_RATE+
             " INT NOT NULL , " +COLUMN_PURCHASE_RATE+
             " INT NOT NULL , " +COLUMN_TOTAL_AMOUNT+
-            " INT NOT NULL )";
+            " INT NOT NULL )";*/
 
-    public int id,tpNumber,billNumber,batchNumber,caseNumber,packing,typeNumber,bottle,exciseRate,purchaseRate,totalAmount;
+    public int id;
+    public int tpNumber;
+    public int billNumber;
+    public String batchNumber;
+    public String caseNumber;
+    public String packing;
+    public int typeNumber;
+    public String bottle;
+    public int exciseRate;
+    public String purchaseRate;
+    public String totalAmount;
     public String vendorName,recievedDate,invoiceDate,tpDate,itemName;
+    public String unit;
 
     public ItemModel() {
     }
 
-    public ItemModel(int id, String vendorName, int tpNumber, int billNumber, String recievedDate, String invoiceDate, String tpDate, String itemName ,
-                     int batchNumber, int caseNumber, int packing, int typeNumber, int bottle, int exciseRate, int purchaseRate, int totalAmount) {
+    // productName,productPacking,productUnit,productBatchNumber,productRatePerBottle,productTotalAmount,productBottleNumber,productCaseNumber;
+    //holder strings
+   // ,String productPacking,int productBatchNumber,int productRatePerBottle,int productTotalAmount,int productBottleNumber ,int productCaseNumber
+   /* this.packing = productPacking;
+        this.batchNumber = productBatchNumber;
+        this.purchaseRate = productRatePerBottle;
+        this.totalAmount = productTotalAmount;
+        this.bottle = productBottleNumber;
+        this.caseNumber = productCaseNumber;*/
+    public ItemModel(String productName,String productPacking,String totalAmount) {
+        this.itemName = productName;
+        this.packing = productPacking;
+        this.totalAmount = totalAmount;
+
+//        this.itemName = productName;
+
+
+    }
+    /*public ItemModel(int id, String vendorName, int tpNumber, int billNumber, String recievedDate, String invoiceDate, String tpDate, String itemName ,
+                     int batchNumber, int caseNumber, String packing, int typeNumber, int bottle, int exciseRate, int purchaseRate, int totalAmount) {
         this.id = id;
         this.vendorName = vendorName;
         this.tpNumber = tpNumber;
@@ -64,9 +91,147 @@ public class ItemModel {
         this.purchaseRate = purchaseRate;
         this.totalAmount = totalAmount;
 
+    }*/
+
+
+
+    public String getUnit() {
+        return unit;
     }
 
-    public static String getTableName() {
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getTpNumber() {
+        return tpNumber;
+    }
+
+    public void setTpNumber(int tpNumber) {
+        this.tpNumber = tpNumber;
+    }
+
+    public int getBillNumber() {
+        return billNumber;
+    }
+
+    public void setBillNumber(int billNumber) {
+        this.billNumber = billNumber;
+    }
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(String batchNumber) {
+        this.batchNumber = batchNumber;
+    }
+
+    public String getCaseNumber() {
+        return caseNumber;
+    }
+
+    public void setCaseNumber(String caseNumber) {
+        this.caseNumber = caseNumber;
+    }
+
+    public String getPacking() {
+        return packing;
+    }
+
+    public void setPacking(String packing) {
+        this.packing = packing;
+    }
+
+    public int getTypeNumber() {
+        return typeNumber;
+    }
+
+    public void setTypeNumber(int typeNumber) {
+        this.typeNumber = typeNumber;
+    }
+
+    public String getBottle() {
+        return bottle;
+    }
+
+    public void setBottle(String bottle) {
+        this.bottle = bottle;
+    }
+
+    public int getExciseRate() {
+        return exciseRate;
+    }
+
+    public void setExciseRate(int exciseRate) {
+        this.exciseRate = exciseRate;
+    }
+
+    public String getPurchaseRate() {
+        return purchaseRate;
+    }
+
+    public void setPurchaseRate(String purchaseRate) {
+        this.purchaseRate = purchaseRate;
+    }
+
+    public String getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(String totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    public String getRecievedDate() {
+        return recievedDate;
+    }
+
+    public void setRecievedDate(String recievedDate) {
+        this.recievedDate = recievedDate;
+    }
+
+    public String getInvoiceDate() {
+        return invoiceDate;
+    }
+
+    public void setInvoiceDate(String invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public String getTpDate() {
+        return tpDate;
+    }
+
+    public void setTpDate(String tpDate) {
+        this.tpDate = tpDate;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+}
+/* public static String getTableName() {
         return TABLE_NAME;
     }
 
@@ -136,133 +301,4 @@ public class ItemModel {
 
     public static String getCreateTable() {
         return CREATE_TABLE;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getTpNumber() {
-        return tpNumber;
-    }
-
-    public void setTpNumber(int tpNumber) {
-        this.tpNumber = tpNumber;
-    }
-
-    public int getBillNumber() {
-        return billNumber;
-    }
-
-    public void setBillNumber(int billNumber) {
-        this.billNumber = billNumber;
-    }
-
-    public int getBatchNumber() {
-        return batchNumber;
-    }
-
-    public void setBatchNumber(int batchNumber) {
-        this.batchNumber = batchNumber;
-    }
-
-    public int getCaseNumber() {
-        return caseNumber;
-    }
-
-    public void setCaseNumber(int caseNumber) {
-        this.caseNumber = caseNumber;
-    }
-
-    public int getPacking() {
-        return packing;
-    }
-
-    public void setPacking(int packing) {
-        this.packing = packing;
-    }
-
-    public int getTypeNumber() {
-        return typeNumber;
-    }
-
-    public void setTypeNumber(int typeNumber) {
-        this.typeNumber = typeNumber;
-    }
-
-    public int getBottle() {
-        return bottle;
-    }
-
-    public void setBottle(int bottle) {
-        this.bottle = bottle;
-    }
-
-    public int getExciseRate() {
-        return exciseRate;
-    }
-
-    public void setExciseRate(int exciseRate) {
-        this.exciseRate = exciseRate;
-    }
-
-    public int getPurchaseRate() {
-        return purchaseRate;
-    }
-
-    public void setPurchaseRate(int purchaseRate) {
-        this.purchaseRate = purchaseRate;
-    }
-
-    public int getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(int totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public String getVendorName() {
-        return vendorName;
-    }
-
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
-    }
-
-    public String getRecievedDate() {
-        return recievedDate;
-    }
-
-    public void setRecievedDate(String recievedDate) {
-        this.recievedDate = recievedDate;
-    }
-
-    public String getInvoiceDate() {
-        return invoiceDate;
-    }
-
-    public void setInvoiceDate(String invoiceDate) {
-        this.invoiceDate = invoiceDate;
-    }
-
-    public String getTpDate() {
-        return tpDate;
-    }
-
-    public void setTpDate(String tpDate) {
-        this.tpDate = tpDate;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-}
+    }*/

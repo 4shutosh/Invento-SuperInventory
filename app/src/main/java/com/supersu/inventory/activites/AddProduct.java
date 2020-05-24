@@ -6,19 +6,18 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.FirebaseApp;
@@ -26,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.supersu.inventory.R;
-import com.supersu.inventory.models.DBHelper;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,13 +33,12 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AddProduct extends AppCompatActivity implements View.OnClickListener{
     EditText etTpNumber,itemPacking,etBillNumber,dpRecieved,dpInvoice,dpTP,etBatchNumber,etCaseNumber,etBottle,etExciseRate,etPurchaseRate,etAmountTotal,etUnitMatch;
@@ -53,7 +51,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     RequestQueue requestQueue;
     ProgressDialog progressDoalog;
     String insertURL = "http://192.168.0.105/invento/addDailyProduct.php";
-    private DBHelper dbHelper;
+    int bottlesperCase ;
 
     String[] itemDepartments={"Select Department","Bottal","Full","QUARTLT","HOME","1.5LTR","650ML","2000ML","NIP",
             "500ML","PEG_L","Liquior","1500ML","OTHER","MIN37","330ML","PEG_S","QUART","MIN9","MIN6",
@@ -97,7 +95,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                 itemType=findViewById(R.id.spinType);
                 requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-                dbHelper = new DBHelper(this);
+                //dbHelper = new DBHelper(this);
 
         etVendorName.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus)
@@ -109,7 +107,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         btnShowProductList = findViewById(R.id.btnShowProductList);
 
         //listners
-
+        btnShowProductList.setOnClickListener(this);
         btnFullAddProduct.setOnClickListener(this);
         dpRecieved.setOnClickListener(this);
         dpInvoice.setOnClickListener(this);
@@ -157,6 +155,10 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
             case R.id.btnFullAddProduct :dataSenderStore();
                 break;
+
+            case R.id.btnShowProductList :
+                Intent showAddedProductList = new Intent(AddProduct.this,ShowAddedProductList.class);
+                startActivity(showAddedProductList);
 
         }
 
@@ -229,70 +231,154 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     }
     @SuppressLint("SetTextI18n")
     public void validityCracker(){
+
           etItemName.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus)
             etItemName.showDropDown();
         });
         etItemName.setOnItemClickListener((adapterView, view, i, l) -> {
             if(etItemName.getText().toString().contains("2000ML")){
+                bottlesperCase = 4;
                 itemPacking.setText("2000ML");
                 etUnitMatch.setText("2000");
             }else if(etItemName.getText().toString().contains("1500ML")) {
+                bottlesperCase =9;
                 itemPacking.setText("1500ML");
                 etUnitMatch.setText("1500");
             }else if(etItemName.getText().toString().contains("QUARTLT")) {
+                bottlesperCase=9;
                 itemPacking.setText("QUARTLT");
                 etUnitMatch.setText("1000");
             }else if(etItemName.getText().toString().contains("QUART")) {
+                bottlesperCase=12;
                 itemPacking.setText("QUART");
                 etUnitMatch.setText("750");
             }else if(etItemName.getText().toString().contains("MIN37")) {
+                bottlesperCase=24;
                 itemPacking.setText("MIN37");
                 etUnitMatch.setText("375");
             }else if(etItemName.getText().toString().contains("MIN6")) {
+                bottlesperCase=150;
                 itemPacking.setText("MIN6");
                 etUnitMatch.setText("60");
             }else if(etItemName.getText().toString().contains("MIN9")) {
+                bottlesperCase=96;
                 itemPacking.setText("MIN9");
                 etUnitMatch.setText("90");
             }else if(etItemName.getText().toString().contains("NIP")) {
+                bottlesperCase=48;
+
                 itemPacking.setText("NIP");
                 etUnitMatch.setText("180");
             }else if(etItemName.getText().toString().contains("LTR")){
+                bottlesperCase=9;
                 itemPacking.setText("LTR");
                 etUnitMatch.setText("1000");
             }else if(etItemName.getText().toString().contains("1.5LTR")) {
+                bottlesperCase=9;
                 itemPacking.setText("1.5LTR");
                 etUnitMatch.setText("1500");
             }else if(etItemName.getText().toString().contains("500ML")) {
+                bottlesperCase=24;
                 itemPacking.setText("500ML");
                 etUnitMatch.setText("500");
             }else if(etItemName.getText().toString().contains("330ML")) {
+                bottlesperCase=24;
                 itemPacking.setText("330ML");
                 etUnitMatch.setText("330");
             }else if(etItemName.getText().toString().contains("650ML")) {
+                bottlesperCase=12;
                 itemPacking.setText("650ML");
                 etUnitMatch.setText("650");
             }else if(etItemName.getText().toString().contains("NIP 1/2")) {
+
                 itemPacking.setText("NIP 1/2");
                 etUnitMatch.setText("90");
             }else if(etItemName.getText().toString().contains("PEG_L")) {
+
                 itemPacking.setText("PEG_L");
                 etUnitMatch.setText("60");
             }else if(etItemName.getText().toString().contains("PEG_S")) {
+
                 itemPacking.setText("PEG_S");
                 etUnitMatch.setText("30");
             }else {
                 itemPacking.setText("Wrong Item Selection");
                 etUnitMatch.setText("Wrong Item Selection");
             }
+
+
+        });
+
+        etBottle.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(etBottle.getText().toString().trim().equals("")||etItemName.getText().toString().trim().equals("")){
+                    Toast.makeText(getApplicationContext(),"wrong Bottles",Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    etCaseNumber.setText(String.valueOf(Integer.parseInt(String.valueOf(etBottle.getText()))/bottlesperCase));
+                    if(etCaseNumber.getText().toString().equals(String.valueOf(bottlesperCase))){
+                        etCaseNumber.setText(String.valueOf(bottlesperCase));
+                    }
+
+                }
+
+
+            }
+        });
+
+
+        etPurchaseRate.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+               // doCalculateData();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                doCalculateData();
+            }
         });
 
 
 
+    }
+    public void doCalculateData(){
+        double bottelsAtTime = 0;
+        int count = 0;
+        Toast toast= null;
+        if(etBottle.getText().toString().equals("")||etPurchaseRate.getText().toString().equals("")){
+
+          etBottle.setText("0");
+        }else {
 
 
+            bottelsAtTime = Double.parseDouble(etBottle.getText().toString().trim());
 
+
+            double total_amount = (bottelsAtTime/bottlesperCase)*Double.parseDouble(etPurchaseRate.getText().toString());
+            Log.d("Calculation", String.valueOf(total_amount));
+            etAmountTotal.setText(String.valueOf(total_amount));}
     }
 
     public void dataSenderStore(){
@@ -347,62 +433,59 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
            dialog.show();
            Log.d("TAG", "clicked");
            Handler handler = new Handler();
-           handler.postDelayed(new Runnable() {
-               public void run() {
-                   StringRequest stringRequest = new StringRequest(Request.Method.POST, insertURL, response -> {
+           handler.postDelayed(() -> {
+               StringRequest stringRequest = new StringRequest(Request.Method.POST, insertURL, response -> {
 
-                   }, error -> {
-
-
-                   }) {
-                       @Override
-                       protected Map<String, String> getParams() {
-                           Map<String, String> map = new HashMap<String, String>();
-                           map.put("_id", "");
-                           map.put("vendorName", etVendorName.getText().toString());
-                           map.put("tpNumber", etTpNumber.getText().toString());
-                           map.put("billNumber", etBillNumber.getText().toString());
-                           map.put("recievedDate", dpRecieved.getText().toString());
-                           map.put("invoiceDate", dpInvoice.getText().toString());
-                           map.put("tpDate", dpTP.getText().toString());
-                           map.put("itemName", etItemName.getText().toString());
-                           map.put("batchNumber", etBatchNumber.getText().toString());
-                           map.put("caseNumber", etCaseNumber.getText().toString());
-                           map.put("unitInt", etUnitMatch.getText().toString());
-                           map.put("packing", itemPacking.getText().toString());
-                           map.put("prodType", String.valueOf(itemType.getSelectedItem()));
-                           map.put("bottle", etBottle.getText().toString());
-                           map.put("exciseRate", etExciseRate.getText().toString());
-                           map.put("purchaseRate", etPurchaseRate.getText().toString());
-                           map.put("toatlAmount", etAmountTotal.getText().toString());
-
-                           return map;
-
-                       }
-                   };
-                   requestQueue.add(stringRequest);
-                           etVendorName.setText("");
-                           etTpNumber.setText("");
-                           etBillNumber.setText("");
-                           dpRecieved.setText("");
-                           dpInvoice.setText("");
-                           etItemName.setText("");
-                           etBatchNumber.setText("");
-                           dpTP.setText("");
-                           etCaseNumber.setText("");
-                           etUnitMatch.setText("");
-                           itemPacking.setText("");
-                           etBottle.setText("");
-                           etExciseRate.setText("");
-                           etPurchaseRate.setText("");
-                           etAmountTotal.setText("");
-                   dialog.dismiss();
+               }, error -> {
 
 
+               }) {
+                   @Override
+                   protected Map<String, String> getParams() {
+                       Map<String, String> map = new HashMap<String, String>();
+                       map.put("vendorName", etVendorName.getText().toString());
+                       map.put("tpNumber", etTpNumber.getText().toString());
+                       map.put("billNumber", etBillNumber.getText().toString());
+                       map.put("recievedDate", dpRecieved.getText().toString());
+                       map.put("invoiceDate", dpInvoice.getText().toString());
+                       map.put("tpDate", dpTP.getText().toString());
+                       map.put("itemName", etItemName.getText().toString());
+                       map.put("batchNumber", etBatchNumber.getText().toString());
+                       map.put("caseNumber", etCaseNumber.getText().toString());
+                       map.put("unitInt", etUnitMatch.getText().toString());
+                       map.put("packing", itemPacking.getText().toString());
+                       map.put("prodType", String.valueOf(itemType.getSelectedItem()));
+                       map.put("bottle", etBottle.getText().toString());
+                       map.put("exciseRate", etExciseRate.getText().toString());
+                       map.put("purchaseRate", etPurchaseRate.getText().toString());
+                       map.put("toatlAmount", etAmountTotal.getText().toString());
+
+                       return map;
+
+                   }
+               };
+               requestQueue.add(stringRequest);
+
+               dialog.dismiss();
+
+               etVendorName.setText("");
+               etTpNumber.setText("");
+               etBillNumber.setText("");
+               dpRecieved.setText("");
+               dpInvoice.setText("");
+               etItemName.setText("");
+               etBatchNumber.setText("");
+               dpTP.setText("");
+               etCaseNumber.setText("");
+               etUnitMatch.setText("");
+               itemPacking.setText("");
+               etBottle.setText("");
+               etExciseRate.setText("");
+               etPurchaseRate.setText("");
+               etAmountTotal.setText("");
 
 
-               }
-           }, 3000);
+           }, 2000);//deliberate delay added for experience
 
        }
 

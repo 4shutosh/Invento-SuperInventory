@@ -17,8 +17,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
-        <activity android:name=".activites.DailyProductView"></activity>
+        <activity android:name=".activites.ClosingManagement"></activity>
+        <activity android:name=".activites.ShowAddedProductList" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity android:name=".activites.DailyProductView" />
         <activity android:name=".activites.AddProduct" />
         <activity android:name=".activites.BrandCategory" />
         <activity android:name=".MainActivity">

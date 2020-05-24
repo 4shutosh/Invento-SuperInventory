@@ -1,0 +1,80 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:orientation="horizontal"
+    app:cardCornerRadius="5dp"
+
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="290dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Name" />
+
+            <TextView
+                android:id="@+id/tvProductPacking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Packing" />
+
+            <TextView
+                android:id="@+id/tvProductUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Unit" />
+
+            <TextView
+                android:id="@+id/tvProductBatchNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Batch Number" />
+
+            <TextView
+                android:id="@+id/tvProductRatePerBottle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Rate/Bottle" />
+
+            <TextView
+                android:id="@+id/tvProductTotalCost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/tvBottles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Bottles" />
+
+            <TextView
+                android:id="@+id/tvCases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Cases" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
