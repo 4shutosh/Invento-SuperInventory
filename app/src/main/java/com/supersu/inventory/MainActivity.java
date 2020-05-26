@@ -14,6 +14,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.supersu.inventory.activites.AddProduct;
 import com.supersu.inventory.activites.BrandCategory;
+import com.supersu.inventory.activites.ClosingManagement;
 import com.supersu.inventory.databinding.ActivityMainBinding;
 
 import java.util.List;
@@ -29,13 +30,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         makePermissions();
+        //card1
         activityMainBinding.productAdd.setOnClickListener(view14 -> {
 
             Intent moveToProductAdd = new Intent(MainActivity.this, AddProduct.class);
             startActivity(moveToProductAdd);
         });
 
-
+//casr3
         activityMainBinding.addBrand.setOnClickListener(view12 -> {
 
             Intent moveToBC = new Intent(MainActivity.this, BrandCategory.class);
@@ -44,8 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
+//card2
         activityMainBinding.stockManager.setOnClickListener(view1 -> {
+            Intent moveToBC = new Intent(MainActivity.this, ClosingManagement.class);
+            startActivity(moveToBC);
 
         });
 

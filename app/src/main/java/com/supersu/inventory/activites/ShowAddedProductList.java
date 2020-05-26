@@ -28,11 +28,11 @@ import java.util.List;
 
 public class ShowAddedProductList extends AppCompatActivity {
     private RecyclerView mainProductList;
-    /*private CustomAdapter customAdapter;*/
+
     private List<ItemModel> data_list;
-    public final String JsonURL = "http://192.168.0.105/invento/readDailyProduct.php";
+    public final String JsonURL = "http://192.168.0.106/invento/readDailyProduct.php";
     private JsonArrayRequest jsonArrayRequest;
-    //private JsonObjectRequest jsonObjectRequest;
+
     private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
