@@ -1,108 +1,34 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="250dp"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    android:orientation="horizontal"
-    app:cardCornerRadius="5dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activites.ClosingManagement">
 
-    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="278dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Closin Management "
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"/>
 
-            <TextView
-                android:id="@+id/tvClosingProductName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Name" />
-
-            <TextView
-                android:id="@+id/tvClosingProductPacking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Packing" />
-
-            <TextView
-                android:id="@+id/tvClosingProductUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Unit" />
-
-            <TextView
-                android:id="@+id/tvClosingProductBatchNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Batch Number" />
-
-            <TextView
-                android:id="@+id/tvClosingProductRatePerBottle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Rate/Bottle" />
-
-            <TextView
-                android:id="@+id/tvClosingProductTotalCost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/etClosingStock"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter sold!" />
-
-            </LinearLayout>
-
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvBottlesPurchased"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Purchased Bottles" />
+            android:layout_height="wrap_content"
+            android:id="@+id/mainClosingIterate"/>
 
-            <TextView
-                android:id="@+id/tvCasesOpening"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Purchased Cases" />
 
-            <TextView
-                android:id="@+id/tvBottlesSale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product \nBottles sold auto" />
-            <Button
-                android:id="@+id/btnAddToExciseClosing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add To Closing" />
 
-        </LinearLayout>
+
+
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
