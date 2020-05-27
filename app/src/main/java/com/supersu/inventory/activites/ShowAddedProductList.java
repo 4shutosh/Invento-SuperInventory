@@ -30,7 +30,7 @@ public class ShowAddedProductList extends AppCompatActivity {
     private RecyclerView mainProductList;
 
     private List<ItemModel> data_list;
-    public final String JsonURL = "http://192.168.0.106/invento/readDailyProduct.php";
+    public  String showProductURL ;
     private JsonArrayRequest jsonArrayRequest;
 
     private RequestQueue requestQueue;
@@ -38,7 +38,7 @@ public class ShowAddedProductList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_added_product_list);
-
+        showProductURL= getResources().getString(R.string.showProductURL);
         mainProductList = findViewById(R.id.mainProductList);
         data_list = new ArrayList<>();
         jsonRequestMaker();
@@ -46,32 +46,32 @@ public class ShowAddedProductList extends AppCompatActivity {
     }
 
     private void jsonRequestMaker() {
-        jsonArrayRequest = new JsonArrayRequest(JsonURL, response -> {
-            JSONObject jsonObject = null;
-            for(int i=0;i<response.length();i++){
+                   jsonArrayRequest = new JsonArrayRequest(showProductURL, response -> {
+                JSONObject jsonObject = null;
+                for(int i=0;i<response.length();i++){
 
-                try {
-                    jsonObject = response.getJSONObject(i);
-                    ItemModel itemModel = new ItemModel();
-                    itemModel.setItemName(jsonObject.getString("itemName"));
-                    itemModel.setUnit(jsonObject.getString("unitInt"));
-                    itemModel.setPacking(jsonObject.getString("packing"));
-                    itemModel.setBatchNumber(jsonObject.getString("batchNumber"));
-                    itemModel.setCaseNumber(jsonObject.getString("caseNumber"));
-                    itemModel.setPurchaseRate(jsonObject.getString("purchaseRate"));
-                    itemModel.setTotalAmount(jsonObject.getString("toatlAmount"));
-                    itemModel.setBottle(jsonObject.getString("bottle"));
-                    Log.d("TAG", String.valueOf(data_list));
-                    data_list.add(itemModel);
-
-
+                    try {
+                        jsonObject = response.getJSONObject(i);
+                        ItemModel itemModel = new ItemModel();
+                        itemModel.setItemName(jsonObject.getString("itemName"));
+                        itemModel.setUnit(jsonObject.getString("unitInt"));
+                        itemModel.setPacking(jsonObject.getString("packing"));
+                        itemModel.setBatchNumber(jsonObject.getString("batchNumber"));
+                        itemModel.setCaseNumber(jsonObject.getString("caseNumber"));
+                        itemModel.setPurchaseRate(jsonObject.getString("purchaseRate"));
+                        itemModel.setTotalAmount(jsonObject.getString("toatlAmount"));
+                        itemModel.setBottle(jsonObject.getString("bottle"));
+                        Log.d("TAG", String.valueOf(data_list));
+                        data_list.add(itemModel);
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    setupRecycleview(data_list);
                 }
-                setupRecycleview(data_list);
-            }
 
 
         }, error -> Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show());

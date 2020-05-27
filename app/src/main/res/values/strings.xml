@@ -5,4 +5,13 @@
     <string name="daily_stock_nmanagement">Daily Stock\nManagement</string>
     <string name="add_product_n">Stock  \n Purchase</string>
     <string name="dashboard">Dashboard</string>
+
+
+    <!--main urls-->
+    <string name="showProductURL">http://192.168.0.106/invento/readDailyProduct.php</string>
+    <string name="insertproductDailyurl">http://192.168.0.106/invento/addDailyProduct.php</string>
+    <string name="homeCounterUrl">#</string>
+    <string name="closingFetchurl">http://192.168.0.106/invento/readDailyProduct.php</string>
+    <string name="cloginSendurl">#</string>
+
 </resources>

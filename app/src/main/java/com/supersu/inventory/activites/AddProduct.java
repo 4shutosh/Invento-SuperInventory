@@ -50,9 +50,9 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     Spinner itemDept,itemType;
     RequestQueue requestQueue;
     ProgressDialog progressDoalog;
-    String insertURL = "http://192.168.0.106/invento/addDailyProduct.php";
+    String insertURL;
     int bottlesperCase ;
-    //public final String JsonURL = "http://192.168.0.105/invento/readDailyProduct.php";
+
     String[] itemDepartments={"Select Department","Bottal","Full","QUARTLT","HOME","1.5LTR","650ML","2000ML","NIP",
             "500ML","PEG_L","Liquior","1500ML","OTHER","MIN37","330ML","PEG_S","QUART","MIN9","MIN6",
             "NIP 1/2","LTR","Kitchen","Half","Food","Full","Kitchen","SOUTH INDIAN","Bottal","Half",
@@ -69,11 +69,13 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
-
+        //url
+        insertURL = getString(R.string.insertproductDailyurl);
         //inits
 
                 etVendorName = findViewById(R.id.etVendorName);
