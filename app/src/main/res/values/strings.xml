@@ -12,6 +12,6 @@
     <string name="insertproductDailyurl">http://192.168.0.106/invento/addDailyProduct.php</string>
     <string name="homeCounterUrl">#</string>
     <string name="closingFetchurl">http://192.168.0.106/invento/readDailyProduct.php</string>
-    <string name="cloginSendurl">#</string>
-
+    <string name="cloginSendurl">http://192.168.0.106/invento/closingStock.php</string>
+    <string name="updateCloser">http://192.168.0.106/invento/updateStock.php</string>
 </resources>

@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -40,14 +41,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AddProduct extends AppCompatActivity implements View.OnClickListener{
-    EditText etTpNumber,itemPacking,etBillNumber,dpRecieved,dpInvoice,dpTP,etBatchNumber,etCaseNumber,etBottle,etExciseRate,etPurchaseRate,etAmountTotal,etUnitMatch;
+public class AddProduct extends AppCompatActivity implements View.OnClickListener,View.OnFocusChangeListener{
+    TextInputEditText etTpNumber,itemPacking,etBillNumber,dpRecieved,dpInvoice,dpTP,etBatchNumber,etCaseNumber,etBottle,etExciseRate,etPurchaseRate,etAmountTotal,etUnitMatch;
     String arr[] = {"etTpNumber","itemPacking","etBillNumber","dpRecieved","dpInvoice","dpTP","etBatchNumber","etCaseNumber","etBottle","etExciseRate","etPurchaseRate","etAmountTotal","etUnitMatch"};
-    AutoCompleteTextView etItemName,etVendorName;
+    AutoCompleteTextView etItemName,etVendorName,itemType;
     Button btnFullAddProduct,btnShowProductList;
     private int mYear, mMonth, mDay, mHour, mMinute,yearGet,monthGet,daGet;
     SQLiteDatabase sqLiteDatabase;
-    Spinner itemDept,itemType;
+    Spinner itemDept;
     RequestQueue requestQueue;
     ProgressDialog progressDoalog;
     String insertURL;
@@ -91,7 +92,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                 etExciseRate=findViewById(R.id.etExciseRate);
                 etPurchaseRate=findViewById(R.id.etPurchaseRate);
                 etAmountTotal=findViewById(R.id.etAmountTotal);
-                itemDept=findViewById(R.id.spinDepartment);
+                //itemDept=findViewById(R.id.spinDepartment);
                 etUnitMatch = findViewById(R.id.etUnitMatch);
                 itemPacking=findViewById(R.id.spinPacking);
                 itemType=findViewById(R.id.spinType);
@@ -111,9 +112,9 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         //listners
         btnShowProductList.setOnClickListener(this);
         btnFullAddProduct.setOnClickListener(this);
-        dpRecieved.setOnClickListener(this);
-        dpInvoice.setOnClickListener(this);
-        dpTP.setOnClickListener(this);
+        dpRecieved.setOnFocusChangeListener(this);
+        dpInvoice.setOnFocusChangeListener(this);
+        dpTP.setOnFocusChangeListener(this);
         setSpinners();
 
         try {
@@ -133,27 +134,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
          mMonth = c.get(Calendar.MONTH);
          mDay = c.get(Calendar.DAY_OF_MONTH);
         switch (view.getId()){
-            case R.id.dpRecieved :
 
-                DatePickerDialog datePickerDialogRecieved = new DatePickerDialog(this,
-                        (view12, year, monthOfYear, dayOfMonth) -> dpRecieved.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), mYear, mMonth, mDay);
-                datePickerDialogRecieved.show();
-                break;
-
-            case R.id.dpInvoice :
-
-                DatePickerDialog datePickerDialogInvoice = new DatePickerDialog(this,
-                        (view1, year, monthOfYear, dayOfMonth) -> dpInvoice.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), mYear, mMonth, mDay);
-                datePickerDialogInvoice.show();
-                break;
-
-
-            case R.id.dpTP :
-
-                DatePickerDialog datePickerDialogTp = new DatePickerDialog(this,
-                        (view13, year, monthOfYear, dayOfMonth) -> dpTP.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), mYear, mMonth, mDay);
-                datePickerDialogTp.show();
-                break;
 
             case R.id.btnFullAddProduct :dataSenderStore();
                 break;
@@ -171,7 +152,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     public void setSpinners(){
         ArrayAdapter<String> deptAdapter = new ArrayAdapter<String>(this,   android.R.layout.simple_spinner_item, itemDepartments);
         deptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        itemDept.setAdapter(deptAdapter);
+//        itemDept.setAdapter(deptAdapter);
 
 
         ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(this,   android.R.layout.simple_spinner_item, typeMaker);
@@ -355,7 +336,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                // doCalculateData();
 
             }
-
+//methopd given
             @Override
             public void afterTextChanged(Editable editable) {
                 doCalculateData();
@@ -384,22 +365,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     }
 
     public void dataSenderStore(){
-       /* $_id= $_POST["_id"];
-        $vendorName= $_POST["vendorName"];
-        $tpNumber= $_POST["tpNumber"];
-        $billNumber= $_POST["billNumber"];
-        $recievedDate= $_POST["recievedDate"];
-        $invoiceDate= $_POST["invoiceDate"];
-        $tpDate= $_POST["tpDate"];
-        $itemName= $_POST["itemName"];
-        $batchNumber= $_POST["batchNumber"];
-        $caseNumber= $_POST["caseNumber"];
-        $packing= $_POST["packing"];
-        $type= $_POST["type"];
-        $bottle= $_POST["bottle"];
-        $exciseRate= $_POST["exciseRate"];
-        $purchaseRate= $_POST["purchaseRate"];
-        $toatlAmount= $_POST["toatlAmount"];*/
+
 
        if(etVendorName.getText().toString().equals("") ||
         etTpNumber.getText().toString().equals("") ||
@@ -456,7 +422,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                        map.put("caseNumber", etCaseNumber.getText().toString());
                        map.put("unitInt", etUnitMatch.getText().toString());
                        map.put("packing", itemPacking.getText().toString());
-                       map.put("prodType", String.valueOf(itemType.getSelectedItem()));
+                       map.put("prodType", itemType.getText().toString());
                        map.put("bottle", etBottle.getText().toString());
                        map.put("exciseRate", etExciseRate.getText().toString());
                        map.put("purchaseRate", etPurchaseRate.getText().toString());
@@ -494,4 +460,34 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
     }
 
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(view.hasFocus()) {
+            switch (view.getId()) {
+                case R.id.dpRecieved :
+
+                DatePickerDialog datePickerDialogRecieved = new DatePickerDialog(this,
+                        (view12, year, monthOfYear, dayOfMonth) -> dpRecieved.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), mYear, mMonth, mDay);
+                datePickerDialogRecieved.show();
+                break;
+
+            case R.id.dpInvoice :
+
+                DatePickerDialog datePickerDialogInvoice = new DatePickerDialog(this,
+                        (view1, year, monthOfYear, dayOfMonth) -> dpInvoice.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), mYear, mMonth, mDay);
+                datePickerDialogInvoice.show();
+                break;
+
+
+            case R.id.dpTP :
+
+                DatePickerDialog datePickerDialogTp = new DatePickerDialog(this,
+                        (view13, year, monthOfYear, dayOfMonth) -> dpTP.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year), mYear, mMonth, mDay);
+                datePickerDialogTp.show();
+                break;
+
+            }
+        }
+
+    }
 }

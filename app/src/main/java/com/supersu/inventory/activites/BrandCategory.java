@@ -37,9 +37,9 @@ public class BrandCategory extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_brand_category);
-
-        etAddBrand = findViewById(R.id.etAddBrand);
+        setContentView(R.layout.sampletest);
+    }
+        /*etAddBrand = findViewById(R.id.etAddBrand);
         etAddCategory = findViewById(R.id.etAddCategory);
         btnAddBrand = findViewById(R.id.btnAddBrand);
         btnAddCategory = findViewById(R.id.btnAddCategory);
@@ -69,10 +69,10 @@ public class BrandCategory extends AppCompatActivity {
     }
 
     public void brandAdder(){
-        /*String tx = etAddBrand.getText().toString();
+        *//*String tx = etAddBrand.getText().toString();
         BrandCategoryRefrence brandCategoryRefrence = new BrandCategoryRefrence(tx);
         databaseReference.child("BrandsList").child(tx);
-        Toast.makeText(getApplicationContext(), "Success :)", Toast.LENGTH_SHORT).show();*/
+        Toast.makeText(getApplicationContext(), "Success :)", Toast.LENGTH_SHORT).show();*//*
 
 
 
@@ -80,5 +80,5 @@ public class BrandCategory extends AppCompatActivity {
     }
     public void categoryAdder(){
 
-    }
+    }*/
 }
