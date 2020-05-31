@@ -5,12 +5,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
 import com.supersu.inventory.R;
 import com.supersu.inventory.adapters.ProductClosingAdapter;
 import com.supersu.inventory.adapters.ProductRecycleViewAdapter;
@@ -37,6 +41,27 @@ public class ClosingManagement extends AppCompatActivity {
         mainClosingList = findViewById(R.id.mainClosingIterate);
         data_list_closing = new ArrayList<>();
         jsonRequestMaker();
+        TextInputEditText etclosingSearch;
+
+        etclosingSearch = findViewById(R.id.etSearchClosing);
+        etclosingSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ProductClosingAdapter pcA = new ProductClosingAdapter();
+                pcA.filter(s.toString());
+            }
+        });
+
 
 
     }

@@ -37,12 +37,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
         android:layout_above="@id/bottomLiner">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fill The Form To Add Single Product"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"
+            android:id="@+id/Heading"/>
+
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="14dp">
+            android:layout_margin="14dp"
+            android:layout_below="@id/Heading">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -150,7 +161,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:hint="Item Name"
-                    app:endIconMode="clear_text"
                     app:endIconTint="@color/colorPrimaryDark">
 
                     <AutoCompleteTextView

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -43,6 +44,10 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
         this.mData = mData;
     }
 
+    public ProductClosingAdapter() {
+
+    }
+
     public void updateList(List<ItemModel> list){
         mData = list;
         notifyDataSetChanged();
@@ -71,119 +76,92 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
         holder.tvClosingProductTotalCost.setText(mData.get(position).getTotalAmount());
         holder.tvBottlesPurchased.setText(mData.get(position).getBottle());
         holder.tvCasesOpening.setText(mData.get(position).getCaseNumber());
-        holder.btnAddToExciseClosing.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View view) {
-                /*Toast.makeText(
-                        mContext,
-                        "Hello Data Sent",
-                        Toast.LENGTH_SHORT
-                ).show();*/
+        holder.btnAddToExciseClosing.setOnClickListener(view -> {
 
 
-                if(holder.etClosingStock.getText().toString().trim().equals("")){
+            if(holder.etClosingStock.getText().toString().trim().equals("")){
 
-                holder.etClosingStock.setError("Please Enter Closing Stock first!");
-
-
-                }else{
-
-                    int mbottlesPurchased = Integer.parseInt(holder.tvBottlesPurchased.getText().toString().trim());
-                    int mClosedbottles  = Integer.parseInt(holder.etClosingStock.getText().toString().trim());
-                    int totalSale = mbottlesPurchased - mClosedbottles;
-
-                holder.tvBottlesSale.setText(""+totalSale);
-
-                //pushing data main
-                    String insertClosingdata = mContext.getString(R.string.cloginSendurl);
-                    RequestQueue requestQueue ;
-                    requestQueue = Volley.newRequestQueue(mContext);
-                    ProgressDialog dialog = ProgressDialog.show(mContext, "Please Wait", "Storing Data...",
-                            true);
-                    dialog.show();
-                    Log.d("TAG", "clicked");
-                    Handler handler = new Handler();
-                    handler.postDelayed(() -> {
-                        StringRequest requestmaker = new StringRequest(Request.Method.POST,insertClosingdata, response -> {
-
-                        },error -> {
-
-                        }) {
-                            //mapput
-                            @Override
-                            protected Map<String, String> getParams() {
-                                Map<String, String> map = new HashMap<>();
-                                map.put("product_name", holder.tvClosingProductName.getText().toString());
-                                map.put("packing", holder.tvClosingProductPacking.getText().toString());
-                                map.put("unit", holder.tvClosingProductUnit.getText().toString());
-                                map.put("batchNumber", holder.tvClosingProductBatchNumber.getText().toString());
-                                map.put("ratePerBottle", holder.tvClosingProductRatePerBottle.getText().toString());
-                                map.put("totalAmount", holder.tvClosingProductTotalCost.getText().toString());
-                                map.put("openingBottleStock",  holder.tvBottlesPurchased.getText().toString());
-                                map.put("closingBottleStock", holder.tvBottlesSale.getText().toString());
-                                map.put("totalSale", holder.etClosingStock.getText().toString());
-
-                                return map;
-
-                            }
-
-                        };
-                        requestQueue.add(requestmaker);
-                        String updateUrl = mContext.getString(R.string.updateCloser);
-                        StringRequest updateMaker = new StringRequest(Request.Method.POST,updateUrl,response ->
-                                Toast.makeText(mContext,"Product For Tomorrow Added",Toast.LENGTH_SHORT).show(), error -> {}){
-                            @Override
-                            protected Map<String, String> getParams() {
-                                Map<String, String> updateMap = new HashMap<>();
-                                updateMap.put("productName",holder.tvClosingProductName.getText().toString());
-                                updateMap.put("totalSale", holder.tvBottlesSale.getText().toString());
-                                return updateMap;
-                            }
-                        };
-                        requestQueue.add(updateMaker);
-
-                        dialog.dismiss();
-                        holder.btnAddToExciseClosing.setEnabled(false);
+            holder.etClosingStock.setError("Please Enter Closing Stock first!");
 
 
-                    },2000);
+            }else{
+
+                int mbottlesPurchased = Integer.parseInt(holder.tvBottlesPurchased.getText().toString().trim());
+                int mClosedbottles  = Integer.parseInt(holder.etClosingStock.getText().toString().trim());
+                int totalSale = mbottlesPurchased - mClosedbottles;
+
+            holder.tvBottlesSale.setText(""+totalSale);
+
+            //pushing data main
+                String insertClosingdata = mContext.getString(R.string.cloginSendurl);
+                RequestQueue requestQueue ;
+                requestQueue = Volley.newRequestQueue(mContext);
+                ProgressDialog dialog = ProgressDialog.show(mContext, "Please Wait", "Storing Data...",
+                        true);
+                dialog.show();
+                Log.d("TAG", "clicked");
+                Handler handler = new Handler();
+                handler.postDelayed(() -> {
+                    StringRequest requestmaker = new StringRequest(Request.Method.POST,insertClosingdata, response -> {
+
+                    },error -> {
+
+                    }) {
+                        //mapput
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> map = new HashMap<>();
+                            map.put("product_name", holder.tvClosingProductName.getText().toString());
+                            map.put("packing", holder.tvClosingProductPacking.getText().toString());
+                            map.put("unit", holder.tvClosingProductUnit.getText().toString());
+                            map.put("batchNumber", holder.tvClosingProductBatchNumber.getText().toString());
+                            map.put("ratePerBottle", holder.tvClosingProductRatePerBottle.getText().toString());
+                            map.put("totalAmount", holder.tvClosingProductTotalCost.getText().toString());
+                            map.put("openingBottleStock",  holder.tvBottlesPurchased.getText().toString());
+                            map.put("closingBottleStock", holder.tvBottlesSale.getText().toString());
+                            map.put("totalSale", holder.etClosingStock.getText().toString());
+
+                            return map;
+
+                        }
+
+                    };
+                    requestQueue.add(requestmaker);
+                    String updateUrl = mContext.getString(R.string.updateCloser);
+                    StringRequest updateMaker = new StringRequest(Request.Method.POST,updateUrl,response ->
+                            Toast.makeText(mContext,"Product For Tomorrow Added",Toast.LENGTH_SHORT).show(), error -> {}){
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> updateMap = new HashMap<>();
+                            updateMap.put("productName",holder.tvClosingProductName.getText().toString());
+                            updateMap.put("totalSale", holder.tvBottlesSale.getText().toString());
+                            return updateMap;
+                        }
+                    };
+                    requestQueue.add(updateMaker);
+
+                    dialog.dismiss();
+                    holder.btnAddToExciseClosing.setEnabled(false);
+
+
+                },2000);
 
 
 
 
 
-
-
-                }
 
 
             }
-        });
 
 
-        holder.etSearchClosing.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-            }
         });
 
 
 
 
     }
-    void filter(String itemName){
+    public void filter(String itemName){
         List<ItemModel> temp = new ArrayList();
         for(ItemModel d: mData){
 
@@ -194,21 +172,7 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
 
         updateList(temp);
     }
-    private void pushGreaterData() {
-        /*$id  = $_POST['id'];
-    $product_name  = $_POST['product_name'];
-    $packing  = $_POST['packing'];
-    $unit  = $_POST['unit'];
-    $batchNumber  = $_POST['batchNumber'];
-    $ratePerBottle  = $_POST['ratePerBottle'];
-    $totalAmount = $_POST['totalAmount'];
-    $openingBottleStock	  = $_POST['openingBottleStock'];
-    $closingBottleStock  = $_POST['closingBottleStock'];
-    $totalSale  = $_POST['totalSale'];*/
 
-
-
-    }
 
     @Override
     public int getItemCount() {
@@ -223,7 +187,7 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
 
         TextInputEditText etClosingStock;
         Button btnAddToExciseClosing;
-        TextInputEditText etSearchClosing;
+
 
         public MyClosingViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -238,7 +202,7 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
             tvBottlesPurchased = itemView.findViewById(R.id.tvBottlesPurchased);
             tvCasesOpening = itemView.findViewById(R.id.tvCasesOpening);
             tvBottlesSale = itemView.findViewById(R.id.tvBottlesSale);
-            etSearchClosing = itemView.findViewById(R.id.etSearchClosing);
+
 
 
 
@@ -247,6 +211,7 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
             etClosingStock = itemView.findViewById(R.id.etClosingStock);
             //btn
             btnAddToExciseClosing = itemView.findViewById(R.id.btnAddToExciseClosing);
+
 
 
         }
