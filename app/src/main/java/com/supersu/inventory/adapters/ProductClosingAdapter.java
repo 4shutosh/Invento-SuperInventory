@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingAdapter.MyClosingViewHolder>{
+public class ProductClosingAdapter extends RecyclerView.Adapter<ProductClosingAdapter.MyClosingViewHolder> {
     private Context mContext;
     private List<ItemModel> mData;
     //private List<ItemModel> mdataFiltered;
@@ -44,22 +44,13 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
         this.mData = mData;
     }
 
-    public ProductClosingAdapter() {
-
-    }
-
-    public void updateList(List<ItemModel> list){
-        mData = list;
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public MyClosingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view;
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        view = inflater.inflate(R.layout.single_closing_product,parent,false);
+        view = inflater.inflate(R.layout.single_closing_product, parent, false);
 
 
         return new MyClosingViewHolder(view);
@@ -79,22 +70,22 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
         holder.btnAddToExciseClosing.setOnClickListener(view -> {
 
 
-            if(holder.etClosingStock.getText().toString().trim().equals("")){
+            if (holder.etClosingStock.getText().toString().trim().equals("")) {
 
-            holder.etClosingStock.setError("Please Enter Closing Stock first!");
+                holder.etClosingStock.setError("Please Enter Closing Stock first!");
 
 
-            }else{
+            } else {
 
                 int mbottlesPurchased = Integer.parseInt(holder.tvBottlesPurchased.getText().toString().trim());
-                int mClosedbottles  = Integer.parseInt(holder.etClosingStock.getText().toString().trim());
+                int mClosedbottles = Integer.parseInt(holder.etClosingStock.getText().toString().trim());
                 int totalSale = mbottlesPurchased - mClosedbottles;
 
-            holder.tvBottlesSale.setText(""+totalSale);
+                holder.tvBottlesSale.setText("" + totalSale);
 
-            //pushing data main
+                //pushing data main
                 String insertClosingdata = mContext.getString(R.string.cloginSendurl);
-                RequestQueue requestQueue ;
+                RequestQueue requestQueue;
                 requestQueue = Volley.newRequestQueue(mContext);
                 ProgressDialog dialog = ProgressDialog.show(mContext, "Please Wait", "Storing Data...",
                         true);
@@ -102,9 +93,9 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
                 Log.d("TAG", "clicked");
                 Handler handler = new Handler();
                 handler.postDelayed(() -> {
-                    StringRequest requestmaker = new StringRequest(Request.Method.POST,insertClosingdata, response -> {
+                    StringRequest requestmaker = new StringRequest(Request.Method.POST, insertClosingdata, response -> {
 
-                    },error -> {
+                    }, error -> {
 
                     }) {
                         //mapput
@@ -117,7 +108,7 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
                             map.put("batchNumber", holder.tvClosingProductBatchNumber.getText().toString());
                             map.put("ratePerBottle", holder.tvClosingProductRatePerBottle.getText().toString());
                             map.put("totalAmount", holder.tvClosingProductTotalCost.getText().toString());
-                            map.put("openingBottleStock",  holder.tvBottlesPurchased.getText().toString());
+                            map.put("openingBottleStock", holder.tvBottlesPurchased.getText().toString());
                             map.put("closingBottleStock", holder.tvBottlesSale.getText().toString());
                             map.put("totalSale", holder.etClosingStock.getText().toString());
 
@@ -128,12 +119,13 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
                     };
                     requestQueue.add(requestmaker);
                     String updateUrl = mContext.getString(R.string.updateCloser);
-                    StringRequest updateMaker = new StringRequest(Request.Method.POST,updateUrl,response ->
-                            Toast.makeText(mContext,"Product For Tomorrow Added",Toast.LENGTH_SHORT).show(), error -> {}){
+                    StringRequest updateMaker = new StringRequest(Request.Method.POST, updateUrl, response ->
+                            Toast.makeText(mContext, "Product For Tomorrow Added", Toast.LENGTH_SHORT).show(), error -> {
+                    }) {
                         @Override
                         protected Map<String, String> getParams() {
                             Map<String, String> updateMap = new HashMap<>();
-                            updateMap.put("productName",holder.tvClosingProductName.getText().toString());
+                            updateMap.put("productName", holder.tvClosingProductName.getText().toString());
                             updateMap.put("totalSale", holder.tvBottlesSale.getText().toString());
                             return updateMap;
                         }
@@ -144,33 +136,11 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
                     holder.btnAddToExciseClosing.setEnabled(false);
 
 
-                },2000);
-
-
-
-
-
-
-
+                }, 2000);
             }
-
-
         });
 
 
-
-
-    }
-    public void filter(String itemName){
-        List<ItemModel> temp = new ArrayList();
-        for(ItemModel d: mData){
-
-            if(d.getItemName().contains(itemName)){
-                temp.add(d);
-            }
-        }
-
-        updateList(temp);
     }
 
 
@@ -182,8 +152,8 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
     public static class MyClosingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        TextView tvClosingProductName,tvClosingProductPacking,tvClosingProductUnit,tvClosingProductBatchNumber,
-                tvClosingProductRatePerBottle,tvClosingProductTotalCost,tvBottlesPurchased,tvCasesOpening,tvBottlesSale;
+        TextView tvClosingProductName, tvClosingProductPacking, tvClosingProductUnit, tvClosingProductBatchNumber,
+                tvClosingProductRatePerBottle, tvClosingProductTotalCost, tvBottlesPurchased, tvCasesOpening, tvBottlesSale;
 
         TextInputEditText etClosingStock;
         Button btnAddToExciseClosing;
@@ -204,24 +174,19 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
             tvBottlesSale = itemView.findViewById(R.id.tvBottlesSale);
 
 
-
-
-
             ///et
             etClosingStock = itemView.findViewById(R.id.etClosingStock);
             //btn
             btnAddToExciseClosing = itemView.findViewById(R.id.btnAddToExciseClosing);
 
 
-
         }
 
         @Override
         public void onClick(View view) {
-            switch(itemView.getId()){
+            switch (itemView.getId()) {
 
-                case R.id.btnAddToExciseClosing :
-
+                case R.id.btnAddToExciseClosing:
 
 
                     break;

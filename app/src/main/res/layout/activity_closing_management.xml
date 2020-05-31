@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activites.ClosingManagement"
-    android:background="#eceff1">
+    android:background="#eceff1"
+    tools:context=".activites.ClosingManagement">
 
 
     <LinearLayout
@@ -16,43 +16,40 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Closing Management"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/nuntioblack"
-            android:textSize="20dp"/>
-
+            android:text="Closing Management"
+            android:textSize="20dp" />
 
 
         <com.google.android.material.textfield.TextInputLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
             android:layout_margin="20dp"
+            android:layout_marginBottom="12dp"
             android:hint="Search by Item Name .. "
-            app:endIconDrawable="@drawable/ic_baseline_search_24"
-            app:endIconTint="@color/colorPrimaryDark"
+            app:boxStrokeColor="#000"
             app:boxStrokeWidth="2dp"
-            app:boxStrokeColor="#000">
+            app:endIconDrawable="@drawable/ic_baseline_search_24"
+            app:endIconTint="@color/colorPrimaryDark">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etSearchClosing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               />
+                android:imeOptions="actionSearch"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mainClosingIterate"
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-
-
-
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>

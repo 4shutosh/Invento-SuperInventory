@@ -33,6 +33,8 @@ public class ClosingManagement extends AppCompatActivity {
     public String closingShowURL;
     private JsonArrayRequest jsonArrayRequests;
     private RequestQueue requestQueues;
+    private TextInputEditText etclosingSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class ClosingManagement extends AppCompatActivity {
         mainClosingList = findViewById(R.id.mainClosingIterate);
         data_list_closing = new ArrayList<>();
         jsonRequestMaker();
-        TextInputEditText etclosingSearch;
+
 
         etclosingSearch = findViewById(R.id.etSearchClosing);
         etclosingSearch.addTextChangedListener(new TextWatcher() {
@@ -57,19 +59,16 @@ public class ClosingManagement extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                ProductClosingAdapter pcA = new ProductClosingAdapter();
-                pcA.filter(s.toString());
+                filter(s.toString());
             }
         });
-
-
 
     }
 
     private void jsonRequestMaker() {
         jsonArrayRequests = new JsonArrayRequest(closingShowURL, response -> {
             JSONObject jsonObject = null;
-            for(int i=0;i<response.length();i++){
+            for (int i = 0; i < response.length(); i++) {
 
                 try {
                     jsonObject = response.getJSONObject(i);
@@ -84,14 +83,7 @@ public class ClosingManagement extends AppCompatActivity {
                     itemModel.setBottle(jsonObject.getString("bottle"));
                     Log.d("TAG", String.valueOf(data_list_closing));
 
-
-
-
-
                     data_list_closing.add(itemModel);
-
-
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -100,7 +92,7 @@ public class ClosingManagement extends AppCompatActivity {
             }
 
 
-        }, error -> Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show());
+        }, error -> Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show());
         requestQueues = Volley.newRequestQueue(ClosingManagement.this);
         requestQueues.add(jsonArrayRequests);
 
@@ -108,10 +100,34 @@ public class ClosingManagement extends AppCompatActivity {
     }
 
     private void setupRecycleview(List<ItemModel> data_list_closing) {
-        ProductClosingAdapter closingRecycleViewAdapter = new ProductClosingAdapter(this,data_list_closing);
+        ProductClosingAdapter closingRecycleViewAdapter = new ProductClosingAdapter(this, data_list_closing);
         mainClosingList.setLayoutManager(new LinearLayoutManager(this));
         mainClosingList.setAdapter(closingRecycleViewAdapter);
 
+    }
+
+    public void filter(String itemName) {
+        List<ItemModel> temp = new ArrayList();
+        for (ItemModel d : data_list_closing) {
+            if (d.getItemName().toUpperCase().contains(itemName.toUpperCase())) {
+                temp.add(d);
+            }
+        }
+        updateList(temp);
+    }
+
+    public void updateList(List<ItemModel> list) {
+        data_list_closing = list;
+        if (!list.isEmpty()) {
+            setupRecycleview(data_list_closing);
+        }
+        emptyEditText();
+    }
+
+    public void emptyEditText() {
+        if (etclosingSearch.getText().toString().matches("")) {
+            jsonRequestMaker();
+        }
     }
 
 }
