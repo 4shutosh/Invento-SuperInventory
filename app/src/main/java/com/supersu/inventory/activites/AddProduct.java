@@ -21,10 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
 import com.supersu.inventory.R;
 
 
@@ -63,10 +60,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
     String[] typeMaker = {"IMFL" ,"Beer", "WINE" ,"MILD BEER"};
 
-    FirebaseDatabase mfirebaseDatabase;
-    DatabaseReference databaseReference;
-    FirebaseApp firebaseApp;
-    FirebaseAuth firebaseAuth;
 
 
 
@@ -129,10 +122,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     @SuppressLint("SetTextI18n")
      @Override
     public void onClick(View view) {
-         final Calendar c = Calendar.getInstance();
-         mYear = c.get(Calendar.YEAR);
-         mMonth = c.get(Calendar.MONTH);
-         mDay = c.get(Calendar.DAY_OF_MONTH);
+
         switch (view.getId()){
 
 
@@ -462,6 +452,10 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onFocusChange(View view, boolean b) {
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
         if(view.hasFocus()) {
             switch (view.getId()) {
                 case R.id.dpRecieved :

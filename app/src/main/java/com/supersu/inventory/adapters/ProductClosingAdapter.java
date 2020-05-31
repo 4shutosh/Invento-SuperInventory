@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +22,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
 import com.supersu.inventory.R;
 import com.supersu.inventory.models.ItemModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,11 +34,18 @@ import java.util.Map;
 public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingAdapter.MyClosingViewHolder>{
     private Context mContext;
     private List<ItemModel> mData;
+    //private List<ItemModel> mdataFiltered;
+    //private  ProductClosingAdapterListner listner;
 
 
     public ProductClosingAdapter(Context mContext, List<ItemModel> mData) {
         this.mContext = mContext;
         this.mData = mData;
+    }
+
+    public void updateList(List<ItemModel> list){
+        mData = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -126,7 +137,7 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
                             protected Map<String, String> getParams() {
                                 Map<String, String> updateMap = new HashMap<>();
                                 updateMap.put("productName",holder.tvClosingProductName.getText().toString());
-                                updateMap.put("totalSale", holder.etClosingStock.getText().toString());
+                                updateMap.put("totalSale", holder.tvBottlesSale.getText().toString());
                                 return updateMap;
                             }
                         };
@@ -151,9 +162,38 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
         });
 
 
+        holder.etSearchClosing.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+
+
+
 
     }
+    void filter(String itemName){
+        List<ItemModel> temp = new ArrayList();
+        for(ItemModel d: mData){
 
+            if(d.getItemName().contains(itemName)){
+                temp.add(d);
+            }
+        }
+
+        updateList(temp);
+    }
     private void pushGreaterData() {
         /*$id  = $_POST['id'];
     $product_name  = $_POST['product_name'];
@@ -181,8 +221,9 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
         TextView tvClosingProductName,tvClosingProductPacking,tvClosingProductUnit,tvClosingProductBatchNumber,
                 tvClosingProductRatePerBottle,tvClosingProductTotalCost,tvBottlesPurchased,tvCasesOpening,tvBottlesSale;
 
-        EditText etClosingStock;
+        TextInputEditText etClosingStock;
         Button btnAddToExciseClosing;
+        TextInputEditText etSearchClosing;
 
         public MyClosingViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -197,6 +238,7 @@ public class ProductClosingAdapter extends  RecyclerView.Adapter<ProductClosingA
             tvBottlesPurchased = itemView.findViewById(R.id.tvBottlesPurchased);
             tvCasesOpening = itemView.findViewById(R.id.tvCasesOpening);
             tvBottlesSale = itemView.findViewById(R.id.tvBottlesSale);
+            etSearchClosing = itemView.findViewById(R.id.etSearchClosing);
 
 
 

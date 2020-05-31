@@ -55,13 +55,13 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
     //permission
-    implementation 'com.karumi:dexter:6.1.0'
+    implementation 'com.karumi:dexter:6.1.2'
 
     //firebase dependencies add below
-    implementation 'com.google.firebase:firebase-auth:19.3.1'
-    implementation 'com.google.firebase:firebase-database:19.3.0'
-    implementation 'com.firebaseui:firebase-ui-database:3.1.0'
+
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "com.airbnb.android:lottie:3.4.0"
+
 
     //volley
     implementation 'com.google.code.gson:gson:2.8.5'
@@ -69,11 +69,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.android.volley:volley:1.1.1'
 
-    //ui
-    implementation 'com.github.florent37:materialtextfield:1.0.7'
 
-    //table view
-    implementation 'com.evrencoskun.library:tableview:0.8.9.2'
 
 
 }

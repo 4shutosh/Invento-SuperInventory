@@ -1,6 +1,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     android:orientation="horizontal"
@@ -12,65 +12,186 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="5dp">
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:background="@color/redClosing" />
 
         <LinearLayout
             android:layout_width="278dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvClosingProductName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Name" />
-
-            <TextView
-                android:id="@+id/tvClosingProductPacking"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Packing" />
-
-            <TextView
-                android:id="@+id/tvClosingProductUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Unit" />
-
-            <TextView
-                android:id="@+id/tvClosingProductBatchNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Batch Number" />
-
-            <TextView
-                android:id="@+id/tvClosingProductRatePerBottle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Rate/Bottle" />
-
-            <TextView
-                android:id="@+id/tvClosingProductTotalCost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total"
-                android:textStyle="bold" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/etClosingStock"
-                    android:layout_width="150dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter sold!" />
+                    android:fontFamily="@font/nuntioblack"
+                    android:text="Item Name: " />
+
+                <TextView
+                    android:id="@+id/tvClosingProductName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioregular"
+                    android:text="Product Name" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioblack"
+                    android:text="Opening Stock : " />
+
+                <TextView
+                    android:id="@+id/tvBottlesPurchased"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioregular"
+                    android:text="QUARTLT" />
+
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioblack"
+                    android:text="Unit : " />
+
+                <TextView
+                    android:id="@+id/tvClosingProductUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioregular"
+                    android:text="2000" />
 
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioblack"
+                    android:text="Batch Number : " />
+
+                <TextView
+                    android:id="@+id/tvClosingProductBatchNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioregular"
+                    android:text="!@#brb" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioblack"
+                    android:text="Rate Per Bottle  :  ₹ " />
+
+                <TextView
+                    android:id="@+id/tvClosingProductRatePerBottle"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntiobold"
+                    android:text="5000"
+                    android:textColor="@color/colorPrimary" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioblack"
+                    android:text="Total Cost  :  ₹ " />
+
+                <TextView
+                    android:id="@+id/tvClosingProductTotalCost"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntiobold"
+                    android:text="5000"
+                    android:textColor="@color/colorPrimary" />
+
+
+            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="7dp"
+                android:hint="Enter Closing Stock"
+                app:endIconMode="clear_text"
+
+                app:endIconTint="@color/colorPrimaryDark">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etClosingStock"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nuntioblack"
+                android:textSize="10dp"
+                android:text="Click button to add to closing >>" />-->
 
         </LinearLayout>
 
@@ -79,29 +200,100 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvBottlesPurchased"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Purchased Bottles" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/tvCasesOpening"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Purchased Cases" />
+                <TextView
+                    android:id="@+id/tvClosingProductPacking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioblack"
+                    android:text="packing"
+                    android:textSize="17dp" />
 
-            <TextView
-                android:id="@+id/tvBottlesSale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product \nBottles sold auto" />
-            <Button
-                android:id="@+id/btnAddToExciseClosing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add To Closing" />
+                <TextView
+                    android:layout_width="83dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioregular"
+                    android:text="Bottles Purchased"
+                    android:textAlignment="center" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="69dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+
+                <TextView
+                    android:id="@+id/tvCasesOpening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioblack"
+                    android:text="20"
+                    android:textSize="17dp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioregular"
+                    android:text="Cases Purchased"
+                    android:textAlignment="center" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="101dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tvBottlesSale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioblack"
+                    android:text="-"
+                    android:textSize="20dp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nuntioregular"
+                    android:text="Stock Remaining" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <Button
+                    android:id="@+id/btnAddToExciseClosing"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Add To Closing" />
+
+
+            </LinearLayout>
         </LinearLayout>
+
+
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>

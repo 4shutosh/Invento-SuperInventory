@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -18,6 +21,7 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.supersu.inventory.activites.AddProduct;
+import com.supersu.inventory.activites.AddProductMiddle;
 import com.supersu.inventory.activites.BrandCategory;
 import com.supersu.inventory.activites.ClosingManagement;
 import com.supersu.inventory.activites.ShowAddedProductList;
@@ -26,15 +30,19 @@ import com.supersu.inventory.databinding.ActivityMainBinding;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PrimitiveIterator;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding activityMainBinding;
     //private String sumURl= getResources().getString(R.string.homeCounterUrl);
     private JsonArrayRequest jsonArrayRequest;
+     private RequestQueue requestQueue;
+    private String repairUrl;
 
-    private RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
         makePermissions();
         //JsonTotalReader();
-
+        repairUrl = getString(R.string.repairUrl);
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
         //card1
         activityMainBinding.productAdd.setOnClickListener(view14 -> {
 
-            Intent moveToProductAdd = new Intent(MainActivity.this, AddProduct.class);
+            Intent moveToProductAdd = new Intent(MainActivity.this, AddProductMiddle.class);
             startActivity(moveToProductAdd);
         });
 
@@ -73,6 +82,26 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+
+
+        activityMainBinding.retry.setOnClickListener(view15 -> {
+          StringRequest  request = new StringRequest(Request.Method.POST,repairUrl, response -> {
+                Toast.makeText(getApplicationContext(),"DB Automatic Repair , Connect Success !",Toast.LENGTH_SHORT).show();
+            },error -> {
+
+                Toast.makeText(getApplicationContext(),"DB Automatic Repair , Connect Error / Data Error !",Toast.LENGTH_SHORT).show();
+
+            }){
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> repairMap = new HashMap<String, String>();
+                    repairMap.put("bottleNumber", "0");
+                    return repairMap;
+
+                }
+            };requestQueue.add(request);
+        });
+
     }
     public void makePermissions(){
 
@@ -92,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }).check();
     }
+
+
+
+
 
     public void JsonTotalReader(){
 

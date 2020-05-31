@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activites.ShowAddedProductList">
+    tools:context=".activites.ShowAddedProductList"
+    android:background="#eceff1">
 
 
     <LinearLayout
@@ -12,10 +13,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Products in Stock"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:fontFamily="@font/nuntioblack"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"/>
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/mainProductList"/>
+            android:id="@+id/mainProductList"
+            />
 
 
 
